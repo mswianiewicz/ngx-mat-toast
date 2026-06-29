@@ -1,0 +1,157 @@
+﻿<mat-toolbar color="primary">
+  <span>🍞 ngx-mat-toast</span>
+  <span class="toolbar-spacer"></span>
+  <span class="toolbar-caption">Angular Material toast library demo</span>
+</mat-toolbar>
+
+<div class="demo-container">
+  <section class="hero">
+    <h1>ngx-mat-toast</h1>
+    <p class="hero-subtitle">
+      A standalone Angular toast library powered by Angular Material Snackbar.
+    </p>
+    <div class="hero-actions">
+      <button mat-raised-button color="primary" (click)="showQuickSuccess()">Quick success</button>
+      <button mat-raised-button color="warn" (click)="showQuickError()">Quick error</button>
+      <button mat-stroked-button (click)="showPersistentToast()">Persistent toast</button>
+      <button mat-stroked-button color="warn" (click)="clearAll()">Clear all</button>
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <section class="playground">
+    <h2>Interactive playground</h2>
+    <div class="playground-layout">
+      <mat-card class="config-card">
+        <mat-card-header>
+          <mat-card-title>Configuration</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Message</mat-label>
+            <input matInput [ngModel]="message()" (ngModelChange)="message.set($event)" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Title (optional)</mat-label>
+            <input matInput [ngModel]="title()" (ngModelChange)="title.set($event)" />
+          </mat-form-field>
+
+          <label class="slider-label">
+            Duration: {{ duration() === 0 ? 'Persistent' : duration() + ' ms' }}
+          </label>
+          <mat-slider min="0" max="10000" step="500" class="full-width">
+            <input
+              matSliderThumb
+              [ngModel]="duration()"
+              (ngModelChange)="duration.set($event ?? 0)"
+            />
+          </mat-slider>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Horizontal position</mat-label>
+            <mat-select
+              [ngModel]="horizontalPosition()"
+              (ngModelChange)="horizontalPosition.set($event)"
+            >
+              @for (position of horizontalPositions; track position.value) {
+                <mat-option [value]="position.value">{{ position.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Vertical position</mat-label>
+            <mat-select
+              [ngModel]="verticalPosition()"
+              (ngModelChange)="verticalPosition.set($event)"
+            >
+              @for (position of verticalPositions; track position.value) {
+                <mat-option [value]="position.value">{{ position.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Progress bar direction</mat-label>
+            <mat-select
+              [ngModel]="progressBarDirection()"
+              (ngModelChange)="progressBarDirection.set($event)"
+            >
+              <mat-option value="decreasing">Decreasing</mat-option>
+              <mat-option value="increasing">Increasing</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="toggles">
+            <mat-slide-toggle [checked]="closeable()" (change)="closeable.set($event.checked)">
+              Show close button
+            </mat-slide-toggle>
+            <mat-slide-toggle [checked]="progressBar()" (change)="progressBar.set($event.checked)">
+              Progress bar
+            </mat-slide-toggle>
+            <mat-slide-toggle
+              [checked]="tapToDismiss()"
+              (change)="tapToDismiss.set($event.checked)"
+            >
+              Tap to dismiss
+            </mat-slide-toggle>
+            <mat-slide-toggle
+              [checked]="preventDuplicates()"
+              (change)="preventDuplicates.set($event.checked)"
+            >
+              Prevent duplicates
+            </mat-slide-toggle>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="toast-buttons" aria-label="Toast type examples">
+        @for (demo of toastTypes; track demo.type) {
+          <button
+            mat-raised-button
+            class="toast-btn"
+            [style.background-color]="demo.color"
+            [style.color]="'white'"
+            (click)="showToast(demo.type)"
+          >
+            Show {{ demo.label }}
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <section class="code-section">
+    <h2>Usage</h2>
+    <pre class="code-block"><code>// app.config.ts
+import &#123; provideAnimationsAsync &#125; from '@angular/platform-browser/animations/async';
+import &#123; provideNgxMatToast &#125; from 'ngx-mat-toast';
+
+export const appConfig = &#123;
+  providers: [
+    provideAnimationsAsync(),
+    provideNgxMatToast(&#123;
+      duration: 3000,
+      position: &#123; horizontal: 'end', vertical: 'top' &#125;,
+      progressBar: true,
+    &#125;),
+  ],
+&#125;;
+
+// my.component.ts
+import &#123; inject &#125; from '@angular/core';
+import &#123; NgxMatToastService &#125; from 'ngx-mat-toast';
+
+export class MyComponent &#123;
+  private readonly toast = inject(NgxMatToastService);
+
+  save() &#123;
+    this.toast.success('File saved!', 'Success');
+  &#125;
+&#125;</code></pre>
+  </section>
+</div>

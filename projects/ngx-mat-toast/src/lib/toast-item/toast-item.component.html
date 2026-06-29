@@ -1,0 +1,66 @@
+<div
+  class="ngx-mat-toast-item ngx-mat-toast-item--{{ toast.type }}"
+  [class.tap-to-dismiss]="toast.config.tapToDismiss"
+  [class.state-enter]="!isLeaving"
+  [class.state-leave]="isLeaving"
+  (click)="onTap()"
+>
+  <div class="ngx-mat-toast-item__icon" aria-hidden="true">
+    @switch (toast.type) {
+      @case ('success') {
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm-1 15-5-5 1.41-1.41L11 14.17l5.59-5.58L18 10l-7 7Z"
+          />
+        </svg>
+      }
+      @case ('error') {
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm4 13.59L14.59 17 12 14.41 9.41 17 8 15.59 10.59 13 8 10.41 9.41 9 12 11.59 14.59 9 16 10.41 13.41 13 16 15.59Z"
+          />
+        </svg>
+      }
+      @case ('warning') {
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path d="M1 21h22L12 2 1 21Zm12-3h-2v-2h2v2Zm0-4h-2v-4h2v4Z" />
+        </svg>
+      }
+      @default {
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path
+            d="M11 9h2V7h-2v2Zm1 13C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10Zm-1-4h2v-6h-2v6Z"
+          />
+        </svg>
+      }
+    }
+  </div>
+
+  <div class="ngx-mat-toast-item__content">
+    @if (toast.title) {
+      <div class="ngx-mat-toast-item__title">{{ toast.title }}</div>
+    }
+    <div class="ngx-mat-toast-item__message">{{ toast.message }}</div>
+  </div>
+
+  @if (toast.config.closeable) {
+    <button
+      mat-icon-button
+      class="ngx-mat-toast-item__close"
+      type="button"
+      (click)="onClose($event)"
+      aria-label="Close notification"
+    >
+      <span class="ngx-mat-toast-item__close-icon" aria-hidden="true">×</span>
+    </button>
+  }
+
+  @if (toast.config.progressBar && toast.config.duration > 0) {
+    <mat-progress-bar
+      class="ngx-mat-toast-item__progress"
+      mode="determinate"
+      [value]="progressValue"
+      [color]="progressColor"
+    />
+  }
+</div>

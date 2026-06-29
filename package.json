@@ -1,29 +1,44 @@
 {
-  "name": "ngx-mat-toast",
+  "name": "ngx-mat-toast-workspace",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
   "private": true,
   "packageManager": "npm@11.13.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve demo",
+    "build": "npm run build:lib && npm run build:demo",
+    "build:lib": "ng build ngx-mat-toast",
+    "build:demo": "ng build demo",
+    "watch:lib": "ng build ngx-mat-toast --watch --configuration development",
+    "test": "npm run test:lib && npm run test:demo",
+    "test:lib": "ng test ngx-mat-toast --watch=false",
+    "test:demo": "ng test demo --watch=false",
+    "test:ci": "npm run test:lib && npm run test:demo",
+    "format": "prettier --write \"**/*.{ts,html,scss,md,json,yml,yaml}\" --ignore-path .prettierignore",
+    "format:check": "prettier --check \"**/*.{ts,html,scss,md,json,yml,yaml}\" --ignore-path .prettierignore",
+    "release": "npm run build:lib && npm publish ./dist/ngx-mat-toast --access public"
+  },
   "dependencies": {
+    "@angular/animations": "^22.0.4",
+    "@angular/cdk": "^22.0.2",
     "@angular/common": "^22.0.0",
     "@angular/compiler": "^22.0.0",
     "@angular/core": "^22.0.0",
     "@angular/forms": "^22.0.0",
+    "@angular/material": "^22.0.2",
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular/build": "^22.0.4",
     "@angular/cli": "^22.0.4",
     "@angular/compiler-cli": "^22.0.0",
+    "jsdom": "^28.0.0",
+    "ng-packagr": "^22.0.0",
     "prettier": "^3.8.1",
-    "typescript": "~6.0.2"
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.8"
   }
 }
