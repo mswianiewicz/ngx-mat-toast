@@ -19,9 +19,8 @@
   cursor: default;
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+  opacity: 0;
+  transform: translateX(var(--ngx-mat-toast-enter-offset, 100%));
 
   &.state-enter {
     animation: toast-enter 0.25s ease forwards;
@@ -46,6 +45,11 @@
     .ngx-mat-toast-item__icon {
       color: var(--ngx-mat-toast-success-color, #4caf50);
     }
+
+    .ngx-mat-toast-item__progress {
+      --mdc-linear-progress-active-indicator-color: var(--ngx-mat-toast-success-color, #4caf50);
+      --mdc-linear-progress-track-color: rgba(76, 175, 80, 0.25);
+    }
   }
 
   &--error {
@@ -53,6 +57,11 @@
 
     .ngx-mat-toast-item__icon {
       color: var(--mat-sys-error, #b00020);
+    }
+
+    .ngx-mat-toast-item__progress {
+      --mdc-linear-progress-active-indicator-color: var(--mat-sys-error, #b00020);
+      --mdc-linear-progress-track-color: rgba(176, 0, 32, 0.15);
     }
   }
 
@@ -62,6 +71,11 @@
     .ngx-mat-toast-item__icon {
       color: var(--ngx-mat-toast-warning-color, #ff9800);
     }
+
+    .ngx-mat-toast-item__progress {
+      --mdc-linear-progress-active-indicator-color: var(--ngx-mat-toast-warning-color, #ff9800);
+      --mdc-linear-progress-track-color: rgba(255, 152, 0, 0.25);
+    }
   }
 
   &--info {
@@ -69,6 +83,11 @@
 
     .ngx-mat-toast-item__icon {
       color: var(--mat-sys-primary, #6750a4);
+    }
+
+    .ngx-mat-toast-item__progress {
+      --mdc-linear-progress-active-indicator-color: var(--mat-sys-primary, #6750a4);
+      --mdc-linear-progress-track-color: rgba(103, 80, 164, 0.15);
     }
   }
 
@@ -137,7 +156,7 @@
 @keyframes toast-enter {
   from {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(var(--ngx-mat-toast-enter-offset, 100%));
   }
   to {
     opacity: 1;
@@ -154,7 +173,7 @@
   }
   to {
     opacity: 0;
-    transform: translateX(110%);
+    transform: translateX(var(--ngx-mat-toast-leave-offset, 110%));
     max-height: 0;
     margin-bottom: 0;
   }

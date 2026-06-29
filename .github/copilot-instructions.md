@@ -7,7 +7,7 @@ This repository contains:
 - `projects/ngx-mat-toast` – the publishable Angular library
 - `projects/demo` – the example application used for local verification
 
-The library targets **Angular 22+** and is intentionally designed to feel familiar to users of `ngx-toastr`, while using **Angular Material Snackbar** internally.
+The library targets **Angular 21+** and is intentionally designed to feel familiar to users of `ngx-toastr`, while using **Angular Material Snackbar** internally.
 
 ## Architecture expectations
 
@@ -28,6 +28,9 @@ The library targets **Angular 22+** and is intentionally designed to feel famili
 - Keep styles scoped and library-safe.
 - Preserve compatibility with strict TypeScript settings and `isolatedModules`.
 - Use `export type` for type-only re-exports.
+- **Full type annotation**: Every variable must be explicitly typed (e.g., `const name: string = 'test';`). Avoid relying on type inference.
+- **Explicit access modifiers**: Mark all public member variables and functions explicitly with the `public` keyword (e.g., `public doSomething(): void {}`).
+- **One interface per file**: Each interface must be defined in its own dedicated file for better modularity and maintainability.
 
 ## Tests
 

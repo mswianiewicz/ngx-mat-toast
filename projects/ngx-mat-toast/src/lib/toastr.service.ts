@@ -1,9 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { NgxMatToastOptions } from './toast.config';
+import type { NgxMatToastOptions } from './toast.config';
 import { NgxMatToastService } from './ngx-mat-toast.service';
 import { NgxMatToastRef } from './toast.ref';
-import { ToastType, type ToastPosition } from './toast.types';
-import { ActiveToast, IndividualConfig, ToastrPositionClass } from './toastr.types';
+import type { ToastType } from './toast.types';
+import type { ToastPosition } from './toast-position';
+import type { ToastrPositionClass } from './toastr.types';
+import type { ActiveToast } from './active-toast';
+import type { IndividualConfig } from './individual-config';
 
 const POSITION_CLASS_MAP: Record<ToastrPositionClass, ToastPosition> = {
   'toast-top-left': { horizontal: 'start', vertical: 'top' },
@@ -59,9 +62,13 @@ function mapCompatConfig(config?: Partial<IndividualConfig>): NgxMatToastOptions
  */
 @Injectable({ providedIn: 'root' })
 export class ToastrService {
-  private readonly toast = inject(NgxMatToastService);
+  private readonly toast: NgxMatToastService = inject(NgxMatToastService);
 
-  success(message?: string, title?: string, override?: Partial<IndividualConfig>): ActiveToast {
+  public success(
+    message?: string,
+    title?: string,
+    override?: Partial<IndividualConfig>,
+  ): ActiveToast {
     return this.createActiveToast(
       this.toast.success(message ?? '', title, mapCompatConfig(override)),
       message,
@@ -69,7 +76,11 @@ export class ToastrService {
     );
   }
 
-  error(message?: string, title?: string, override?: Partial<IndividualConfig>): ActiveToast {
+  public error(
+    message?: string,
+    title?: string,
+    override?: Partial<IndividualConfig>,
+  ): ActiveToast {
     return this.createActiveToast(
       this.toast.error(message ?? '', title, mapCompatConfig(override)),
       message,
@@ -77,7 +88,7 @@ export class ToastrService {
     );
   }
 
-  info(message?: string, title?: string, override?: Partial<IndividualConfig>): ActiveToast {
+  public info(message?: string, title?: string, override?: Partial<IndividualConfig>): ActiveToast {
     return this.createActiveToast(
       this.toast.info(message ?? '', title, mapCompatConfig(override)),
       message,
@@ -85,7 +96,11 @@ export class ToastrService {
     );
   }
 
-  warning(message?: string, title?: string, override?: Partial<IndividualConfig>): ActiveToast {
+  public warning(
+    message?: string,
+    title?: string,
+    override?: Partial<IndividualConfig>,
+  ): ActiveToast {
     return this.createActiveToast(
       this.toast.warning(message ?? '', title, mapCompatConfig(override)),
       message,
@@ -93,7 +108,7 @@ export class ToastrService {
     );
   }
 
-  show(
+  public show(
     message?: string,
     title?: string,
     override?: Partial<IndividualConfig>,
@@ -106,7 +121,7 @@ export class ToastrService {
     );
   }
 
-  clear(toastId?: string): void {
+  public clear(toastId?: string): void {
     if (toastId) {
       this.toast.dismiss(toastId);
       return;
@@ -115,7 +130,7 @@ export class ToastrService {
     this.toast.clear();
   }
 
-  remove(toastId?: string): boolean {
+  public remove(toastId?: string): boolean {
     if (!toastId) {
       this.toast.clear();
       return true;

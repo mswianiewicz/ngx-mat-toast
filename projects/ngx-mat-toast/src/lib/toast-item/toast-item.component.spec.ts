@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ToastItemComponent } from './toast-item.component';
-import { ToastData } from '../toast.model';
+import type { ToastData } from '../toast.model';
 import { DEFAULT_TOAST_CONFIG } from '../toast.config';
 import { vi } from 'vitest';
 
@@ -11,6 +11,7 @@ function createToast(overrides: Partial<ToastData> = {}): ToastData {
     title: 'Toast title',
     type: 'success',
     createdAt: Date.now(),
+    isVisible: true,
     config: {
       ...DEFAULT_TOAST_CONFIG,
       duration: 3000,
@@ -119,17 +120,39 @@ describe('ToastItemComponent', () => {
 
   it('starts the progress bar at 0 when increasing direction is used', () => {
     const fixture = TestBed.createComponent(ToastItemComponent);
-    fixture.componentInstance.toast = createToast({
-      config: {
-        ...DEFAULT_TOAST_CONFIG,
-        progressBar: true,
-        duration: 3000,
-        progressBarDirection: 'increasing',
-      },
-    });
+    fixture.componentRef.setInput(
+      'toast',
+      createToast({
+        config: {
+          ...DEFAULT_TOAST_CONFIG,
+          progressBar: true,
+          duration: 3000,
+          progressBarDirection: 'increasing',
+        },
+      }),
+    );
     fixture.detectChanges();
 
     expect(fixture.componentInstance.progressValue).toBe(0);
+  });
+
+  it('only applies the enter state once the toast becomes visible', () => {
+    const fixture = TestBed.createComponent(ToastItemComponent);
+    fixture.componentRef.setInput('toast', createToast({ isVisible: false }));
+    fixture.detectChanges();
+
+    let element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('.ngx-mat-toast-item')?.classList.contains('state-enter')).toBe(
+      false,
+    );
+
+    fixture.componentRef.setInput('toast', createToast({ isVisible: true }));
+    fixture.detectChanges();
+
+    element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('.ngx-mat-toast-item')?.classList.contains('state-enter')).toBe(
+      true,
+    );
   });
 
   it('dismisses after clicking the toast when tapToDismiss is enabled', () => {
