@@ -8,9 +8,9 @@ It is designed for teams that want a modern, typed toast API that still feels fa
 
 **NPM Package:** [https://www.npmjs.com/package/ngx-mat-toast](https://www.npmjs.com/package/ngx-mat-toast)
 
-<p>
-  <img src="docs/assets/preview.gif" alt="ngx-mat-toast preview" width="436" />
-</p>
+| Light style | Full style |
+| --- | --- |
+| ![ngx-mat-toast preview - Light style](docs/assets/Preview_1.png) | ![ngx-mat-toast preview - Full style](docs/assets/Preview_2.png) |
 
 ## Why `ngx-mat-toast`?
 
