@@ -4,10 +4,9 @@
 
 It is designed for teams that want a modern, typed toast API that still feels familiar when coming from `ngx-toastr`.
 
-<p>
-  <img src="docs/assets/Preview_1.png" alt="ngx-mat-toast preview - Light style" style="width: 45%" />
-  <img src="docs/assets/Preview_2.png" alt="ngx-mat-toast preview - Full style" style="width: 45%" />
-</p>
+| Light style | Full style |
+| --- | --- |
+| ![ngx-mat-toast preview - Light style](docs/assets/Preview_1.png) | ![ngx-mat-toast preview - Full style](docs/assets/Preview_2.png) |
 
 ## Why `ngx-mat-toast`?
 
