@@ -189,7 +189,7 @@ If your browser support matrix does not allow `color-mix()`, use static colors i
 
 .ngx-mat-toast-snack-panel .ngx-mat-toast-item--success .ngx-mat-toast-item__icon {
   color: #ffffff !important;
-  background-color: white !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .ngx-mat-toast-snack-panel .ngx-mat-toast-item--success .ngx-mat-toast-item__title,
