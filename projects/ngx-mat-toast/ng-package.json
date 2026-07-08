@@ -3,6 +3,7 @@
   "dest": "../../dist/ngx-mat-toast",
   "assets": ["README.md", "LICENSE"],
   "lib": {
-    "entryFile": "src/public-api.ts"
+    "entryFile": "src/public-api.ts",
+    "flatModuleFile": "ngx-mat-toast"
   }
 }
