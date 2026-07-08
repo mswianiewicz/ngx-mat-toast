@@ -41,16 +41,7 @@
   "main": "./fesm2022/ngx-mat-toast.mjs",
   "module": "./fesm2022/ngx-mat-toast.mjs",
   "types": "./types/ngx-mat-toast.d.ts",
-  "exports": {
-    ".": {
-      "types": "./types/ngx-mat-toast.d.ts",
-      "import": "./fesm2022/ngx-mat-toast.mjs",
-      "default": "./fesm2022/ngx-mat-toast.mjs"
-    },
-    "./package.json": {
-      "default": "./package.json"
-    }
-  },
+  "typings": "./types/ngx-mat-toast.d.ts",
   "peerDependencies": {
     "@angular/cdk": ">=21.0.0 <23.0.0",
     "@angular/common": ">=21.0.0 <23.0.0",
