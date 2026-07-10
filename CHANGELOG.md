@@ -7,6 +7,50 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [22.0.6] – 2026-07-10
+
+### Changed
+
+- Updated README files for improved clarity and documentation structure.
+
+---
+
+## [22.0.5] – 2026-07-09
+
+### Fixed
+
+- Fixed maximum toast container width calculation error.
+
+---
+
+## [22.0.4] – 2026-07-08
+
+### Changed
+
+- Updated library metadata.
+
+---
+
+## [22.0.3] – 2026-07-08
+
+### Changed
+
+- Updated library metadata.
+
+---
+
+## [22.0.2] – 2026-07-08
+
+### Added
+
+- Created library metadata.
+
+### Changed
+
+- Updated dependencies.
+
+---
+
 ## [22.0.1] – 2026-07-03
 
 ### Changed
