@@ -16,7 +16,6 @@ Related guides:
 Here is a ready-made example using branded colors for a professionally styled toast system:
 
 ```scss
-
 :root {
   // Brand colors
   --brand-mid-green: #5A9114`;
@@ -50,11 +49,15 @@ Here is a ready-made example using branded colors for a professionally styled to
     }
   }
 
-  @each $type, $color in (
-      ('success', var(--brand-mid-green)),
-      ('warning', var(--brand-mid-orange)),
-      ('error', var(--brand-red)),
-      ('info', var(--brand-mid-blue))) {
+  @each $type,
+    $color
+      in (
+        ('success', var(--brand-mid-green)),
+        ('warning', var(--brand-mid-orange)),
+        ('error', var(--brand-red)),
+        ('info', var(--brand-mid-blue))
+      )
+  {
     .ngx-mat-toast-item--#{$type} {
       background: #{$color} !important;
 
@@ -64,7 +67,6 @@ Here is a ready-made example using branded colors for a professionally styled to
     }
   }
 }
-
 ```
 
 **Result:**

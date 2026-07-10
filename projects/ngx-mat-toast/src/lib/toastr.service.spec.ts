@@ -32,7 +32,7 @@ describe('ToastrService compatibility adapter', () => {
       positionClass: 'toast-bottom-left',
     });
 
-    expect(toastService._toasts()[0]?.config).toMatchObject({
+    expect(toastService.toasts()[0]?.config).toMatchObject({
       duration: 4500,
       closeable: true,
       progressBar: true,
@@ -49,7 +49,7 @@ describe('ToastrService compatibility adapter', () => {
       disableTimeOut: true,
     });
 
-    expect(toastService._toasts()[0]?.config.duration).toBe(0);
+    expect(toastService.toasts()[0]?.config.duration).toBe(0);
   });
 
   it('returns an ActiveToast-like object and can clear a specific toast', () => {
@@ -61,12 +61,12 @@ describe('ToastrService compatibility adapter', () => {
 
     service.clear(activeToast.toastId);
 
-    expect(toastService._toasts()).toHaveLength(0);
+    expect(toastService.toasts()).toHaveLength(0);
   });
 
   it('normalizes ngx-toastr style type strings in show()', () => {
     service.show('Problem', 'Error', undefined, 'toast-error');
 
-    expect(toastService._toasts()[0]?.type).toBe('error');
+    expect(toastService.toasts()[0]?.type).toBe('error');
   });
 });

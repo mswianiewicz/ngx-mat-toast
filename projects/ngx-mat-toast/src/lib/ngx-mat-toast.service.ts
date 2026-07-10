@@ -1,5 +1,5 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef, type MatSnackBarConfig } from '@angular/material/snack-bar';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { MatSnackBar, type MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
 import {
   DEFAULT_TOAST_CONFIG,
   type NgxMatToastConfig,
@@ -64,8 +64,9 @@ export class NgxMatToastService {
   private readonly globalConfig: NgxMatToastOptions =
     inject(NGX_MAT_TOAST_CONFIG, { optional: true }) ?? {};
 
-  /** @internal Reactive list of active toasts used by the outlet component. */
-  public readonly _toasts: WritableSignal<ToastData[]> = signal<ToastData[]>([]);
+  private readonly _toasts: WritableSignal<ToastData[]> = signal<ToastData[]>([]);
+
+  public readonly toasts: Signal<ToastData[]> = this._toasts.asReadonly();
 
   private outletRef: MatSnackBarRef<ToastContainerComponent> | null = null;
   private outletPosition: ToastPosition | null = null;

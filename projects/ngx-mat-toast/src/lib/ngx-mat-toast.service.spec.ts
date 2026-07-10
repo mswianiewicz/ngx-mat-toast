@@ -44,18 +44,18 @@ describe('NgxMatToastService', () => {
     service.success('Saved successfully');
 
     expect(openSpy).toHaveBeenCalledTimes(1);
-    expect(service._toasts()).toHaveLength(1);
-    expect(service._toasts()[0]?.type).toBe('success');
+    expect(service.toasts()).toHaveLength(1);
+    expect(service.toasts()[0]?.type).toBe('success');
   });
 
   it('reveals the first toast after the snackbar outlet finishes opening', async () => {
     service.success('Saved successfully');
 
-    expect(service._toasts()[0]?.isVisible).toBe(false);
+    expect(service.toasts()[0]?.isVisible).toBe(false);
 
     await new Promise((resolve) => setTimeout(resolve, outletOpenDelayMs));
 
-    expect(service._toasts()[0]?.isVisible).toBe(true);
+    expect(service.toasts()[0]?.isVisible).toBe(true);
   });
 
   it('shows additional toasts immediately once the outlet is open', async () => {
@@ -65,8 +65,8 @@ describe('NgxMatToastService', () => {
 
     service.success('Second');
 
-    expect(service._toasts()[0]?.isVisible).toBe(true);
-    expect(service._toasts()[1]?.isVisible).toBe(true);
+    expect(service.toasts()[0]?.isVisible).toBe(true);
+    expect(service.toasts()[1]?.isVisible).toBe(true);
   });
 
   it('creates success, error, warning, and info toasts', () => {
@@ -75,7 +75,7 @@ describe('NgxMatToastService', () => {
     service.warning('Warning');
     service.info('Info');
 
-    expect(service._toasts().map((toast) => toast.type)).toEqual([
+    expect(service.toasts().map((toast) => toast.type)).toEqual([
       'success',
       'error',
       'warning',
@@ -88,7 +88,7 @@ describe('NgxMatToastService', () => {
       position: { vertical: 'bottom' },
     });
 
-    expect(service._toasts()[0]?.config.position).toEqual({
+    expect(service.toasts()[0]?.config.position).toEqual({
       horizontal: 'end',
       vertical: 'bottom',
     });
@@ -99,7 +99,7 @@ describe('NgxMatToastService', () => {
     const second = service.success('Duplicate', undefined, { preventDuplicates: true });
 
     expect(first).toBe(second);
-    expect(service._toasts()).toHaveLength(1);
+    expect(service.toasts()).toHaveLength(1);
   });
 
   it('does not treat toasts with different titles as duplicates when preventDuplicates is enabled', () => {
@@ -111,14 +111,14 @@ describe('NgxMatToastService', () => {
     });
 
     expect(first).not.toBe(second);
-    expect(service._toasts()).toHaveLength(2);
+    expect(service.toasts()).toHaveLength(2);
   });
 
   it('allows duplicates when preventDuplicates is disabled', () => {
     service.success('Duplicate', undefined, { preventDuplicates: false });
     service.success('Duplicate', undefined, { preventDuplicates: false });
 
-    expect(service._toasts()).toHaveLength(2);
+    expect(service.toasts()).toHaveLength(2);
   });
 
   it('removes the oldest toast when maxToasts is exceeded', () => {
@@ -126,17 +126,17 @@ describe('NgxMatToastService', () => {
     service.success('Second', undefined, { maxToasts: 2 });
     service.success('Third', undefined, { maxToasts: 2 });
 
-    expect(service._toasts().map((toast) => toast.message)).toEqual(['Second', 'Third']);
+    expect(service.toasts().map((toast) => toast.message)).toEqual(['Second', 'Third']);
   });
 
   it('auto-dismisses a toast after its configured duration', async () => {
     service.success('Dismiss me', undefined, { duration: 10 });
 
-    expect(service._toasts()).toHaveLength(1);
+    expect(service.toasts()).toHaveLength(1);
 
     await new Promise((resolve) => setTimeout(resolve, autoDismissWaitMs));
 
-    expect(service._toasts()).toHaveLength(0);
+    expect(service.toasts()).toHaveLength(0);
   });
 
   it('keeps persistent toasts open when duration is 0', async () => {
@@ -144,7 +144,7 @@ describe('NgxMatToastService', () => {
 
     await new Promise((resolve) => setTimeout(resolve, autoDismissWaitMs));
 
-    expect(service._toasts()).toHaveLength(1);
+    expect(service.toasts()).toHaveLength(1);
   });
 
   it('dismisses a toast by id and notifies its ref', () => {
@@ -156,7 +156,7 @@ describe('NgxMatToastService', () => {
     expect(service.dismiss(ref.id)).toBe(true);
     expect(service.dismiss('missing-id')).toBe(false);
     expect(dismissedSpy).toHaveBeenCalledTimes(1);
-    expect(service._toasts()).toHaveLength(0);
+    expect(service.toasts()).toHaveLength(0);
   });
 
   it('completes the dismissal stream when a toast is removed', () => {
@@ -185,7 +185,7 @@ describe('NgxMatToastService', () => {
 
     service.clear();
 
-    expect(service._toasts()).toHaveLength(0);
+    expect(service.toasts()).toHaveLength(0);
   });
 
   it('reopens the snackbar outlet when the requested position changes', () => {
