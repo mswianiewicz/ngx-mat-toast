@@ -1,13 +1,16 @@
 # ngx-mat-toast
 
-`ngx-mat-toast` is a toast notification library for Angular built on top of **Angular Material Snackbar**.
+![ngx-mat-toast preview](https://raw.githubusercontent.com/Robin-Bley/ngx-mat-toast/main/docs/assets/Preview_1.png)
 
-It provides a simple, `ngx-toastr`-style API while keeping the implementation aligned with modern Angular practices.
+`ngx-mat-toast` is a modern **Angular toast notification library** for Angular 21+ built on top of **Angular Material Snackbar**. 
+It provides a familiar `ngx-toastr`-style API while leveraging Material's robust snackbar components and modern Angular patterns (standalone APIs, dependency injection, signals-ready).
+
+Perfect for developers migrating from `ngx-toastr`, building Angular Material applications, or needing reliable toast notifications with Material Design aesthetics.
 
 > **🚀 Migrating from `ngx-toastr`?**
 >
 > `ngx-toastr` is [archived](https://github.com/scttcper/ngx-toastr) and no longer compatible with Angular 22+.
-> `ngx-mat-toast` provides a straightforward migration path.
+> `ngx-mat-toast` provides a straightforward migration path with a compatibility adapter.
 > See the [migration guide](https://github.com/Robin-Bley/ngx-mat-toast/blob/main/docs/migrating-from-ngx-toastr.md) for details.
 
 ## Highlights
@@ -24,7 +27,7 @@ It provides a simple, `ngx-toastr`-style API while keeping the implementation al
 
 For the full documentation set, see the repository docs:
 
-- [Documentation hub](https://github.com/Robin-Bley/ngx-mat-toast/blob/main/docs/README.md)
+- [Documentation hub](https://github.com/Robin-Bley/ngx-mat-toast/tree/main/docs)
 - [Getting started](https://github.com/Robin-Bley/ngx-mat-toast/blob/main/docs/getting-started.md)
 - [Configuration guide](https://github.com/Robin-Bley/ngx-mat-toast/blob/main/docs/configuration.md)
 - [API reference](https://github.com/Robin-Bley/ngx-mat-toast/blob/main/docs/api-reference.md)
@@ -39,10 +42,17 @@ For the full documentation set, see the repository docs:
 ## Installation
 
 ```bash
-npm install ngx-mat-toast @angular/material @angular/cdk
+npm install ngx-mat-toast@^22.0.0 @angular/material@^22.0.0 @angular/cdk@^22.0.0
 ```
 
-> `ngx-mat-toast` uses CSS-native motion and does not require an Angular animations provider for its own snackbar-based rendering.
+### Compatibility matrix
+
+| ngx-mat-toast | Angular | Material | CDK |
+| ------------- | ------- | -------- | --- |
+| `^22.0.0`     | `^22.0` | `^22.0`  | `^22.0` |
+| `^21.0.0`     | `^21.0` | `^21.0`  | `^21.0` |
+
+> **Note:** `ngx-mat-toast` uses CSS-native motion and does not require an Angular animations provider for its own snackbar-based rendering. Just install the peer dependencies from your target Angular version.
 
 ---
 
@@ -103,25 +113,72 @@ export class AppModule {}
 
 ## Service API
 
+### Core methods
+
 ```ts
 success(message: string, title?: string, options?: NgxMatToastOptions): NgxMatToastRef
 error(message: string, title?: string, options?: NgxMatToastOptions): NgxMatToastRef
 warning(message: string, title?: string, options?: NgxMatToastOptions): NgxMatToastRef
 info(message: string, title?: string, options?: NgxMatToastOptions): NgxMatToastRef
 show(message: string, type?: ToastType, title?: string, options?: NgxMatToastOptions): NgxMatToastRef
+```
 
+All toast creation methods return a `NgxMatToastRef` object that allows you to:
+
+- **`dismiss(id?: string): boolean`** – Programmatically dismiss a specific toast by ID (or dismiss all toasts if no ID provided)
+- **`afterDismissed(): Observable<void>`** – Subscribe to be notified when the toast is dismissed
+
+### Utility methods
+
+```ts
 dismiss(id: string): boolean
 clear(): void
 ```
 
-### Example
+### Example: Creating and managing toasts
 
 ```ts
-const ref = this.toast.info('Sync in progress...', 'Background job', { duration: 0 });
+import { Component, inject } from '@angular/core';
+import { NgxMatToastService } from 'ngx-mat-toast';
 
-ref.afterDismissed().subscribe(() => {
-  console.log('Toast closed');
-});
+@Component({
+  selector: 'app-example',
+  template: `
+    <button (click)="showSuccess()">Success</button>
+    <button (click)="showPersistent()">Persistent</button>
+    <button (click)="dismissAll()">Dismiss All</button>
+  `,
+})
+export class ExampleComponent {
+  private readonly toast = inject(NgxMatToastService);
+
+  showSuccess(): void {
+    this.toast.success('Profile saved successfully.', 'Saved');
+  }
+
+  showPersistent(): void {
+    // Show a persistent toast with duration: 0
+    const ref = this.toast.info('Sync in progress...', 'Background job', { 
+      duration: 0,
+      closeable: true 
+    });
+
+    // Subscribe to dismissal
+    ref.afterDismissed().subscribe(() => {
+      console.log('Toast was closed by user');
+    });
+
+    // Optionally dismiss programmatically later
+    setTimeout(() => {
+      ref.dismiss();
+    }, 5000);
+  }
+
+  dismissAll(): void {
+    // Clear all visible toasts
+    this.toast.clear();
+  }
+}
 ```
 
 ---

@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/ngx-mat-toast.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-toast)
 [![CI](https://github.com/Robin-Bley/ngx-mat-toast/actions/workflows/test.yml/badge.svg)](https://github.com/Robin-Bley/ngx-mat-toast/actions/workflows/test.yml)
 [![npm downloads](https://img.shields.io/npm/dm/ngx-mat-toast.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-toast)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/ngx-mat-toast?style=flat-square)](https://bundlephobia.com/package/ngx-mat-toast)
+[![License MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 [![Angular](https://img.shields.io/badge/Angular-21%2B-red?style=flat-square&logo=angular)](https://angular.dev)
 
 `ngx-mat-toast` is an Angular toast notification library built on top of **Angular Material `MatSnackBar`**.
@@ -22,7 +24,6 @@ It is designed for teams that want a modern, typed toast API that still feels fa
 
 ## Why `ngx-mat-toast`?
 
-- Angular `21+`
 - powered by Angular Material Snackbar
 - standalone and NgModule integration styles
 - simple service API: `success()`, `error()`, `warning()`, `info()`, `show()`, `dismiss()`, `clear()`
@@ -30,6 +31,7 @@ It is designed for teams that want a modern, typed toast API that still feels fa
 - duplicate prevention, progress bars, close buttons, persistent toasts, and max toast limits
 - optional `ToastrService` compatibility adapter for `ngx-toastr` migrations
 - no Material Icons webfont dependency
+- SSR-compatible (works with Angular Universal / @angular/ssr)
 - demo application and Vitest-based tests included in the workspace
 
 ---
@@ -81,9 +83,7 @@ export class ExampleComponent {
 
 > `ngx-mat-toast` uses native CSS motion for both the toast cards and the current Angular Material snackbar host, so no Angular animations provider is required for the library itself.
 
-**Using NgModules instead of standalone APIs?** Use `NgxMatToastModule.forRoot()`. The full setup is documented in [`docs/getting-started.md`](docs/getting-started.md).
-
-> **Architecture note:** `ngx-mat-toast` keeps a stack of toast cards inside a single Material snackbar host. If active toasts request different positions, the stack moves to the most recently requested position.
+> **Using NgModules instead of standalone APIs?** Use `NgxMatToastModule.forRoot()`. The full setup is documented in [`docs/getting-started.md`](docs/getting-started.md).
 
 ---
 
@@ -148,7 +148,7 @@ Recommended reading:
 
 ## Demo
 
-- Online demo: [StackBlitz](https://stackblitz.com/github/Robin-Bley/ngx-mat-toast?file=README.md)
+- Online demo: [StackBlitz](https://stackblitz.com/github/Robin-Bley/ngx-mat-toast?file=projects/demo/src/app/app.ts)
 - Local demo app: `projects/demo`
 
 Run it locally:
