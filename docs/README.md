@@ -6,7 +6,7 @@ Use it as the primary reference once the library is installed, or as a guided le
 
 ---
 
-## Start here
+## Documentation guide
 
 | Goal                                                          | Recommended guide                                                |
 | ------------------------------------------------------------- | ---------------------------------------------------------------- |
@@ -20,16 +20,14 @@ Use it as the primary reference once the library is installed, or as a guided le
 | Understand the compatibility adapter in detail                | [`compatibility-adapter.md`](./compatibility-adapter.md)         |
 | Diagnose integration or styling problems                      | [`troubleshooting.md`](./troubleshooting.md)                     |
 
----
+### Suggested reading order for new projects
 
-## Recommended reading order
-
-1. Read [`getting-started.md`](./getting-started.md) to install and wire up the library.
-2. Read [`configuration.md`](./configuration.md) to choose sensible global defaults.
-3. Keep [`api-reference.md`](./api-reference.md) open while integrating the service.
-4. Use [`customization.md`](./customization.md) and [`examples.md`](./examples.md) when refining UX.
-5. Read [`migrating-from-ngx-toastr.md`](./migrating-from-ngx-toastr.md) or [`compatibility-adapter.md`](./compatibility-adapter.md) if you are replacing `ngx-toastr`.
-6. Use [`architecture.md`](./architecture.md) and [`troubleshooting.md`](./troubleshooting.md) for advanced questions.
+1. [`getting-started.md`](./getting-started.md) – install and wire up the library
+2. [`configuration.md`](./configuration.md) – choose sensible global defaults
+3. [`api-reference.md`](./api-reference.md) – reference while integrating
+4. [`examples.md`](./examples.md) – copy production-ready patterns
+5. [`customization.md`](./customization.md) – refine visuals and UX as needed
+6. [`architecture.md`](./architecture.md) and [`troubleshooting.md`](./troubleshooting.md) – for advanced topics
 
 ---
 
@@ -64,28 +62,6 @@ Use these defaults unless your product has a strong reason to differ:
 
 ---
 
-## Documentation map
-
-### Foundation
-
-- [`getting-started.md`](./getting-started.md)
-- [`configuration.md`](./configuration.md)
-- [`api-reference.md`](./api-reference.md)
-
-### UX and implementation
-
-- [`customization.md`](./customization.md)
-- [`examples.md`](./examples.md)
-- [`architecture.md`](./architecture.md)
-
-### Migration and support
-
-- [`migrating-from-ngx-toastr.md`](./migrating-from-ngx-toastr.md)
-- [`compatibility-adapter.md`](./compatibility-adapter.md)
-- [`troubleshooting.md`](./troubleshooting.md)
-
----
-
 ## Related resources
 
 - Root overview: [`../README.md`](../README.md)
@@ -95,41 +71,14 @@ Use these defaults unless your product has a strong reason to differ:
 
 ---
 
-## Suggested path by audience
+## For specific use cases
 
-### New Angular consumers
-
-Start with:
-
-1. [`getting-started.md`](./getting-started.md)
-2. [`configuration.md`](./configuration.md)
-3. [`examples.md`](./examples.md)
-
-### Teams migrating from `ngx-toastr`
-
-> **Important:** `ngx-toastr` is [archived](https://github.com/scttcper/ngx-toastr) and no longer compatible with Angular 22+.
-> `ngx-mat-toast` provides a straightforward migration path to keep your toast notifications working.
-
-Start with:
-
-1. [`migrating-from-ngx-toastr.md`](./migrating-from-ngx-toastr.md)
-2. [`compatibility-adapter.md`](./compatibility-adapter.md)
-3. [`api-reference.md`](./api-reference.md)
-
-### Maintainers and contributors
-
-Start with:
-
-1. [`architecture.md`](./architecture.md)
-2. [`api-reference.md`](./api-reference.md)
-3. [`troubleshooting.md`](./troubleshooting.md)
+**New to Angular toast libraries?** → Start with [`getting-started.md`](./getting-started.md)  
+**Migrating from `ngx-toastr`?** → See [`migrating-from-ngx-toastr.md`](./migrating-from-ngx-toastr.md) and [`compatibility-adapter.md`](./compatibility-adapter.md)  
+**Working on the library itself?** → Consult [`architecture.md`](./architecture.md) and [`troubleshooting.md`](./troubleshooting.md)
 
 ---
 
-## Need a quick visual overview?
+## Version history and support
 
-The project README contains preview images and a compact quick start:
-
-- [`../README.md`](../README.md)
-
-For the full walkthrough, stay inside this `docs/` folder.
+Check [`../CHANGELOG.md`](../CHANGELOG.md) for release notes, features, and breaking changes.
