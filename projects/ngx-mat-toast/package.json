@@ -12,8 +12,8 @@
     "snackbar",
     "toastr",
     "ngx",
-    "ngx-toastr"
-  , "migration",
+    "ngx-toastr",
+    "migration",
     "angular22",
     "standalone",
     "signal",

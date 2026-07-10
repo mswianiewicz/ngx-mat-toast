@@ -2,7 +2,7 @@
 
 ![ngx-mat-toast preview](https://raw.githubusercontent.com/Robin-Bley/ngx-mat-toast/main/docs/assets/Preview_1.png)
 
-`ngx-mat-toast` is a modern **Angular toast notification library** for Angular 21+ built on top of **Angular Material Snackbar**. 
+`ngx-mat-toast` is a modern **Angular toast notification library** for Angular 21+ built on top of **Angular Material Snackbar**.
 It provides a familiar `ngx-toastr`-style API while leveraging Material's robust snackbar components and modern Angular patterns (standalone APIs, dependency injection, signals-ready).
 
 Perfect for developers migrating from `ngx-toastr`, building Angular Material applications, or needing reliable toast notifications with Material Design aesthetics.
@@ -47,8 +47,8 @@ npm install ngx-mat-toast@^22.0.0 @angular/material@^22.0.0 @angular/cdk@^22.0.0
 
 ### Compatibility matrix
 
-| ngx-mat-toast | Angular | Material | CDK |
-| ------------- | ------- | -------- | --- |
+| ngx-mat-toast | Angular | Material | CDK     |
+| ------------- | ------- | -------- | ------- |
 | `^22.0.0`     | `^22.0` | `^22.0`  | `^22.0` |
 | `^21.0.0`     | `^21.0` | `^21.0`  | `^21.0` |
 
@@ -158,9 +158,9 @@ export class ExampleComponent {
 
   showPersistent(): void {
     // Show a persistent toast with duration: 0
-    const ref = this.toast.info('Sync in progress...', 'Background job', { 
+    const ref = this.toast.info('Sync in progress...', 'Background job', {
       duration: 0,
-      closeable: true 
+      closeable: true,
     });
 
     // Subscribe to dismissal
