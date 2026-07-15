@@ -6,7 +6,10 @@
   [attr.role]="ariaRole()"
   [attr.aria-live]="ariaLive()"
   aria-atomic="true"
+  tabindex="0"
   (click)="onTap()"
+  (keydown.enter)="onTap()"
+  (keydown.space)="onTap()"
 >
   <div class="ngx-mat-toast-item__icon" aria-hidden="true">
     @switch (toast().type) {

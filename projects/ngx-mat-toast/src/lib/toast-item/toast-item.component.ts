@@ -13,8 +13,8 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { interval, Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { interval } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import type { ToastData } from '../toast.model';
@@ -51,7 +51,6 @@ export class ToastItemComponent {
   private readonly _startTime: WritableSignal<number> = signal<number>(0);
   private readonly _tick: WritableSignal<number> = signal<number>(0);
   private leaveTimer: ReturnType<typeof setTimeout> | undefined;
-  private tickUnsubscribe$: Subject<void> = new Subject<void>();
 
   /**
    * Current progress-bar value (0–100), reactively computed from elapsed time.
@@ -104,7 +103,7 @@ export class ToastItemComponent {
     });
 
     // Start the progress bar tick interval only when the progress bar is active.
-    effect((): void => {
+    effect((onCleanup) => {
       const toastData: ToastData = this.toast();
       const shouldTick: boolean =
         toastData.isVisible &&
@@ -115,11 +114,16 @@ export class ToastItemComponent {
 
       if (shouldTick) {
         // Subscribe to the interval and update the tick signal
-        interval(50)
+        const subscription = interval(50)
           .pipe(takeUntilDestroyed(destroyRef))
           .subscribe((): void => {
             this._tick.update((value: number): number => value + 1);
           });
+
+        // Register cleanup function to unsubscribe when effect re-runs or is destroyed
+        onCleanup((): void => {
+          subscription.unsubscribe();
+        });
       }
     });
 
@@ -129,8 +133,6 @@ export class ToastItemComponent {
         clearTimeout(this.leaveTimer);
         this.leaveTimer = undefined;
       }
-      this.tickUnsubscribe$.next();
-      this.tickUnsubscribe$.complete();
     });
   }
 
