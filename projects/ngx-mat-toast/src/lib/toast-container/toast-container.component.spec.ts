@@ -44,7 +44,6 @@ describe('ToastContainerComponent', () => {
         tappedIds.push(id);
       },
       position: { horizontal: 'start', vertical: 'top' },
-      fullWidth: false,
     };
 
     await TestBed.configureTestingModule({

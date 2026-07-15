@@ -12,5 +12,4 @@ export interface ToastOutletData {
   dismiss: (id: string) => void;
   tap: (id: string) => void;
   position: ToastPosition;
-  fullWidth: boolean;
 }

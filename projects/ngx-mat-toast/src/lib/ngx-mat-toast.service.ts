@@ -12,6 +12,7 @@ import type { ToastType } from './toast.types';
 import type { ToastPosition } from './toast-position';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import type { ToastOutletData } from './toast-container/toast-outlet-data';
+import type { OutletState } from './outlet-state';
 
 let nextToastId: number = 0;
 
@@ -22,18 +23,6 @@ function createToastId(): string {
 
 function positionsMatch(a: ToastPosition, b: ToastPosition): boolean {
   return a.horizontal === b.horizontal && a.vertical === b.vertical;
-}
-
-/**
- * Encapsulates the state of the active Material snackbar outlet so that the
- * three previously separate fields (`outletRef`, `outletPosition`, `outletOpened`)
- * live together as a single nullable object.
- */
-interface OutletState {
-  ref: MatSnackBarRef<ToastContainerComponent>;
-  position: ToastPosition;
-  fullWidth: boolean;
-  opened: boolean;
 }
 
 function outletMatchesRequest(
@@ -235,7 +224,6 @@ export class NgxMatToastService {
       dismiss: (id: string) => this.removeToast(id),
       tap: (id: string) => this.handleTap(id),
       position,
-      fullWidth,
     };
 
     const panelClasses: string[] = ['ngx-mat-toast-snack-panel'];
