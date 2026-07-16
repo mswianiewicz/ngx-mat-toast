@@ -24,8 +24,8 @@ function stubOutlet(snackBar: MatSnackBar): OutletControl[] {
 
   vi.spyOn(snackBar, 'openFromComponent').mockImplementation(
     (_component: unknown, config?: unknown): MatSnackBarRef<ToastContainerComponent> => {
-      const opened$ = new Subject<void>();
-      const dismissed$ = new Subject<void>();
+      const opened$: Subject<void> = new Subject<void>();
+      const dismissed$: Subject<void> = new Subject<void>();
 
       const stub = {
         afterOpened: (): Subject<void> => opened$,

@@ -14,7 +14,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import type { ToastData } from '../toast.model';
@@ -114,7 +114,7 @@ export class ToastItemComponent {
 
       if (shouldTick) {
         // Subscribe to the interval and update the tick signal
-        const subscription = interval(50)
+        const subscription: Subscription = interval(50)
           .pipe(takeUntilDestroyed(destroyRef))
           .subscribe((): void => {
             this._tick.update((value: number): number => value + 1);
