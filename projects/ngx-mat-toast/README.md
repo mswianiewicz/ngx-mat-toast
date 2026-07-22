@@ -50,7 +50,7 @@ npm install ngx-mat-toast@^22.0.0 @angular/material@^21.0.0 @angular/cdk@^21.0.0
 ### Compatibility matrix
 
 | ngx-mat-toast | Angular            | Material           | CDK                |
-|---------------|--------------------|--------------------|--------------------|
+| ------------- | ------------------ | ------------------ | ------------------ |
 | `^22.0.0`     | `^21.0` or `^22.0` | `^21.0` or `^22.0` | `^21.0` or `^22.0` |
 
 > **Note:** `ngx-mat-toast` uses CSS-native motion and does not require an Angular animations provider for its own snackbar-based rendering. Just install the peer dependencies from your target Angular version.
