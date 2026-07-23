@@ -118,6 +118,11 @@ export class ToastItemComponent {
           .pipe(takeUntilDestroyed(destroyRef))
           .subscribe((): void => {
             this._tick.update((value: number): number => value + 1);
+
+            const elapsed: number = Date.now() - this._startTime();
+            if (elapsed >= toastData.config.duration) {
+              subscription.unsubscribe();
+            }
           });
 
         // Register cleanup function to unsubscribe when effect re-runs or is destroyed
